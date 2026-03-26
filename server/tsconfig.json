@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+
+    "outDir": "./build",
+    "rootDir": "./src",
+
+    // coding rules
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@middlewares": ["./src/middlewares/"],
+      "@controllers": ["./src/controllers"],
+      "@routes": ["./src/routes"],
+      "@models": ["./src/models"],
+      "@utils": ["./src/utils"],
+      "@types": ["./src/types"],
+      "@configs": ["./src/configs"],
+      "@validators": ["./src/validators"],
+      "@services": ["./src/services"]
+    }
+  },
+  "typeRoots": ["./src/types", "./node_modules/@types"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "/**/*.log"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}
