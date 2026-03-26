@@ -1,15 +1,17 @@
 import { useFormik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLogin } from "@/hooks/useLogin";
+import { useProfile } from "@/hooks/useProfile";
 import { loginSchema } from "@/validators/login.validators";
 import { AuthForm } from "@/components/ui/AuthForm";
 
 const Login = () => {
   const { mutate } = useLogin();
   const navigate = useNavigate();
+  const { data: profileData, isLoading } = useProfile();
 
   const formik = useFormik({
     initialValues: { email: "", password: "" },
@@ -19,6 +21,13 @@ const Login = () => {
         onSuccess: () => navigate("/host"),
       }),
   });
+
+  if (isLoading) {
+    return <div className="p-6 text-center">Loading...</div>;
+  }
+  if (profileData?.data) {
+    return <Navigate to="/host" replace />;
+  }
 
   return (
     <AuthForm title="Login" description="Enter your email">
