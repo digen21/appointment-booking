@@ -26,10 +26,17 @@ export class AvailabilityService {
   ) {
     const start = new Date(`${data.date}T${data.startTime}`);
     const end = new Date(`${data.date}T${data.endTime}`);
+    const now = new Date();
 
     if (start >= end)
       throw new ServerError({
         message: "Start time must be less than end time",
+        status: httpStatus.BAD_REQUEST,
+      });
+
+    if (start <= now)
+      throw new ServerError({
+        message: "Start time must be in the future",
         status: httpStatus.BAD_REQUEST,
       });
 

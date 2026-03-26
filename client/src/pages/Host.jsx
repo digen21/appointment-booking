@@ -34,6 +34,11 @@ const Host = () => {
   if (error && error.response.status === 409) {
     toast.error("Slot Already available");
   }
+  if (error && error.response.status === 400) {
+    toast.error(
+      error.response.data?.message || "Start time must be in the future",
+    );
+  }
 
   const frontendLink = `${window.location.origin}${data?.link}`;
 
